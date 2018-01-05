@@ -23,7 +23,17 @@ to use these examples, please install BAI DU
 ```
 
 ### Usage
+```
+Usage: ocrscan.py [OPTIONS]
 
-
+Options:
+  -c [table|word]
+  -f TEXT          image file path
+  -o TEXT          output file path
+  -d TEXT          directory for batch file processing
+  --help           Show this message and exit.
+```
+example:
+python ocrscan.py -c table -f ./1.img
 
 

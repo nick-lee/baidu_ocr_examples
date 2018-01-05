@@ -89,7 +89,7 @@ def handle_table_ocr(client,f):
 
     # timeout value request because if ask result so quickly, the server may not handle it in time!
     print("  wating server to process")
-    sleep_with_dots(10)
+    sleep_with_dots(14)
     try:
         print("  get result request_id = %s " % (msg_back['result'][0]['request_id']))
         options = {}
@@ -97,7 +97,7 @@ def handle_table_ocr(client,f):
         # type could be json | excel
         options["result_type"] = "excel"
         ocr_back = client.getTableRecognitionResult(msg_back['result'][0]['request_id'],{'result_type':'excel'})
-        #print(ocr_back)
+        print(ocr_back)
         print("  server return status : %s " % ocr_back['result']['ret_msg'])
         #print("url : %s " % ocr_back['result']['result_data'])
         filename = get_file_by_url(ocr_back['result']['result_data'], './output/table')
@@ -111,7 +111,7 @@ def handle_table_ocr(client,f):
         #pprint(ocr_back)
     except Exception as err:
         print err
-        print("AIP return error , REQUEST_ID[%s] ERROR_MSG[%s]" % (msb_back['result'][0]['request_id'],ocr_back['result']['error_msg']) )
+        #print("AIP return error , REQUEST_ID[%s] ERROR_MSG[%s]" % (msg_back['result'][0]['request_id'],ocr_back['result']['error_msg']) )
         logdata.result='get the %s result error'
         return 
 
@@ -146,7 +146,6 @@ def main(c,f,o,d):
         print "Please choose the file or directory, use --help for detail" 
         return
 
-
     aipconf = AipConf()
     try:
         load_conf(aipconf)
@@ -155,7 +154,7 @@ def main(c,f,o,d):
         return
 
     client = AipOcr(aipconf.app_id, aipconf.api_key,aipconf.secret_key)
-    pprint(client)
+    # pprint(client)
     print("Connect Server with APP_ID[%s] API_KEY[%s] SECRET_KEY[%s] " % (aipconf.app_id,aipconf.api_key ,aipconf.secret_key) )
     if (d):
         file_count = 0
